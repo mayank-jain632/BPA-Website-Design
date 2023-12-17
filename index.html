@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Game Day Grill
+        </title>    
+
+        <link rel = "stylesheet"
+        type = "text/css"
+        href = "style.css"
+        href='https://fonts.googleapis.com/css?family=Graduate'/> 
+    </head>
+    
+
+    <body class = "bodyHome">
+        
+        <div class = "main">      
+            <img src = "logo.png" style = "width: 4vw; margin-left: 5vw; margin-right: -3vw;">  
+            <a href = index.html>
+                Game Day Grill
+            </a>
+        </div>
+
+        <nav class = "link">
+            <a href = "index.html" Style = "color: #FFF200">
+                Home
+            </a>
+
+            <a href = "menu.html">
+                Menu
+            </a>
+
+            <a href = "online_ordering.html">
+                Order Online
+            </a>
+
+            <a href = "aboutUs.html">
+                About Us
+            </a>
+        </nav>
+
+        <div class = "home_main">
+            <h1> Game <br> Day <br> Grill <br> </h1>
+
+            <img src = "football.png">
+        </div>
+        
+
+
+
+        <nav class = "second_link_box">
+            <div class = "extra_boxes #main">
+                <img src = "reservation.png" Style = "width: 6vw; height: auto; margin-top: 25vh">
+                <p>
+                    Want to come eat but hate waiting in lines?
+                </p>
+
+                <button onClick = "openNav()">
+                    Make A Reservation!
+                </button>
+            </div>
+
+            <div class = "extra_boxes">
+                <img src = "menu_icon.png" Style = "width: 6vw; height: auto; margin-top: 25vh">
+
+                <p>
+                    Check out everything we have to offer <br>
+                    from wings to fajitas.
+                </p>
+
+                <a href = "menu.html">
+                    <button>
+                        See Our Full Menu!
+                    </button>
+                </a>
+            </div>
+
+            <div class = "extra_boxes ">
+                <img src = "special.png" Style = "width: 6vw; height: auto; margin-top: 25vh">
+                <p>
+                    Have a Birthday, anniversary, or any other special event 
+                    coming up? Look no further.
+                </p>
+
+                
+                <button onClick = "openEvent()">
+                    Book A Special Event!
+                </button>
+            </div>
+        </nav>
+
+        <div id="mySidebarRes" class="sidebarRes">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <h2> Make A Reservation</h2>
+            <div class = "res_input_boxes">
+                <form1 id = "name">
+                    <label for = "Enter Name"> Name: </label> <br>
+                    <input name = "Enter Name" placeholder = "Enter Name" type = "text" id = "Enter Name">
+                </form1>
+    
+                <form1 id = "date">
+                    <label for = "Date"> Date: </label> <br>
+                    <input name = "Date" placeholder = "Date" type = "date" id = "Date">
+                </form1>
+    
+                <form1>
+                    <label for = "Time"> Time: </label> <br>
+                    <input name = "Time" placeholder = "Time" type = "time" id = "Time">
+                </form1>
+    
+                <form1>
+                    <label for = "Party Size"> Party Size: </label> <br>
+                    <input name = "Party Size" placeholder = "Party Size" type = "number" id = "Party Size">
+                </form1>
+            </div>
+
+            <button class = "res_submit_button" onClick="closeNav()">
+                Reserve Your Spot!
+            </button>
+        </div>
+
+
+        <div id="message-container" class="message-container">
+            <h1 class="large-message"> Your Table Has Been Reserved! </h1>
+        </div>
+
+        <div id="message-container1" class="message-container1">
+            <h1 class="large-message1"> Your Event Has Been Reserved! </h1>
+        </div>
+
+
+
+
+        <div id="mySidebarEvent" class="sidebarEvent">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeEvent()">×</a>
+            <h2> Book A Special Event </h2>
+            <div class = "res_input_boxes">
+                <form1 id = "name">
+                    <label for = "Enter Name"> Name: </label> <br>
+                    <input name = "Enter Name" placeholder = "Enter Name" type = "text" id = "Enter Name">
+                </form1>
+    
+                <form1 id = "date">
+                    <label for = "Date"> Date: </label> <br>
+                    <input name = "Date" placeholder = "Date" type = "date" id = "Date">
+                </form1>
+    
+                <form1>
+                    <label for = "Time"> Time: </label> <br>
+                    <input name = "Time" placeholder = "Time" type = "time" id = "Time">
+                </form1>
+    
+                <form1>
+                    <label for = "Party Size"> Party Size: </label> <br>
+                    <input name = "Party Size" placeholder = "Party Size" type = "number" id = "Party Size">
+                </form1>
+    
+                <form1>
+                    <label for = "Event"> Event: </label> <br>
+                    <input name = "Event" placeholder = "Event" type = "text" id = "Event">
+                </form1>
+            </div>
+
+            <button class = "res_submit_button" onClick = "closeEvent()">
+                Reserve Your Spot!
+            </button>
+
+        </div>
+
+
+        <div class = "third_sub_section_home">
+            <div class = "top_part_of_third">
+                <img src = "menu_images/steak.jpeg"/>
+
+                <text1>
+                    "Experience the finest flavors at Game Day Grill, <br>
+                    where our culinary expertise meets the freshest ingredients, <br>
+                    delivering an unparalleled dining experience."
+                </text1>
+            </div>
+
+            <div class = "bottom_part_of_third">
+                <text1>
+                    Indulge in our decadent desserts crafted with the finest ingredients, <br>
+                    ensuring a sweet symphony of flavors in every bite.
+                </text1>
+
+                <img src = "menu_images/lavaCake.jpeg"/>
+            </div>
+
+
+
+            
+        </div>
+
+
+
+        <script>
+            function scrollToBottom() {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+
+            // sidebar
+            function openNav() {
+                document.getElementById("mySidebarRes").style.width = "35vw";
+                document.getElementById("main").style.marginLeft = "50vw";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidebarRes").style.width = "0";
+                document.getElementById("mySidebarRes").style.marginLeft= "0";
+                 
+                var messageContainer = document.getElementById("message-container");
+
+                messageContainer.style.marginLeft = "100vw"
+                messageContainer.style.width = "101vw"; // Show the container
+                
+
+                setTimeout(function() {
+                    messageContainer.style.width = "0vw";
+                    messageContainer.style.marginLeft = "-1.1%";
+                }, 2000);
+            }
+
+
+            function openEvent() {
+                document.getElementById("mySidebarEvent").style.width = "35vw";
+                document.getElementById("mySidebarEvent").style.marginLeft = "-35vw";
+            }
+
+            function closeEvent() {
+                document.getElementById("mySidebarEvent").style.width = "0";
+                document.getElementById("mySidebarEvent").style.marginLeft= "35vw";
+
+                document.getElementById("mySidebarRes").style.width = "0";
+                document.getElementById("mySidebarRes").style.marginLeft = "0";
+
+                var messageContainer = document.getElementById("message-container1");
+
+                messageContainer.style.marginLeft = "100vw"
+                messageContainer.style.width = "101vw"; // Show the container
+                
+
+                setTimeout(function() {
+                    messageContainer.style.width = "0vw";
+                    messageContainer.style.marginLeft = "-1.1%";
+                }, 2000);
+            }
+
+            
+        </script>
+
+
+
+        <footer class = "footer">
+            <a href = index.html>
+                Game Day Grill
+            </a>
+
+            <div>
+                <text>
+                    123.456.7890
+                </text>
+    
+                <text>
+                    GameDayGrill@gmail.com
+                </text>
+    
+                <text>
+                    Follow Our Instagram: @GDG
+                </text>
+
+                <text>
+                    123 Eat St. Mckinney, Tx 75070
+                </text>
+
+                <img src = "BPALogo.png"/>
+            </div>
+
+            
+
+        </footer>
+    </body>
+
+    
+    
+    
+    
+
+</html>

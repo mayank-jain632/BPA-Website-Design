@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Game Day Grill
+        </title>    
+
+        <link rel = "stylesheet"
+        type = "text/css"
+        href = "style.css"/> 
+    </head>
+    
+
+
+    <body class = "body">
+        
+        <div class = "main">      
+            <img src = "logo.png" style = "width: 4vw; margin-left: 5vw; margin-right: -3vw;">  
+            <a href = index.html>
+                Game Day Grill
+            </a>
+        </div>
+
+        <nav class = "link">
+            <a href = "index.html">
+                Home
+            </a>
+
+            <a href = "menu.html"  Style = "color: #FFF200">
+                Menu
+            </a>
+
+            <a href = "online_ordering.html">
+                Order Online
+            </a>
+
+            <a href = "aboutUs.html">
+                About Us
+            </a>
+        </nav>
+        
+        
+        <div class = "titleImage">
+            <img src="menu_images/menuMain.webp" class="main_food_image1" alt="Food Image" id="main_food_image1"/>
+
+            <TextImgMain1>
+                Menu
+            </TextImgMain1>
+        </div>
+
+        <div class = "main_menu">
+            
+            <div class = "appetizers">
+                <Text1>
+                    Appetizers
+                </Text1>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Fried Mozzarella Slices x 5 - $13.50</Text>
+                </div>
+                
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Hot Buffalo Wings x 6 - $8.99</Text>
+                </div>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Chili Nacho Fries - $9.99 </Text>
+                </div>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Onion Rings - $6.50 </Text>
+                </div>
+            </div>
+            
+            <div class = "appetizers">
+                <Text1>
+                    Entrees
+                </Text1>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Classic Burger - $9.50 </Text>
+                </div>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Chicken Fajitas - $14.99</Text>
+                </div>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Mushroom Pizza - $18.50 </Text>
+                </div>
+                
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Steak - $29.99 </Text>
+                </div>
+
+            </div>
+            
+        </div>
+        
+        
+        <div class = "dessertImage">
+            <img src="menu_images/dessertBG.webp" class="main_food_image1" alt="Food Image" id="dessert_food_image1"/>
+        </div>
+
+        <div class = "main_menu">
+            <div class = 'appetizers'>
+                <Text1>
+                    Dessert
+                </Text1>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Lava Cake - $7.50 </Text>
+                </div>
+                
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Banana Crepes - $3.99</Text>
+                </div>
+                
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Cheesecake - $2.99 per slice </Text>
+                </div>
+                
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Root Beer Float - $4.99 </Text>
+                </div>    
+            </div>
+            
+            <div class = 'appetizers'>
+                <Text2>
+                    Drink
+                </Text2>
+
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Lemonade - $4.99 </Text>
+                </div>
+    
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Fountain Soda (All Options) - $3.99 </Text>
+                </div>
+    
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Beer (All Options) - $5.99 </Text>
+                </div>
+    
+                <div class = "menu_item_group">
+                    <img src = "football.png" class = "football_bullet_points">
+                    <Text> Apple/Orange Juice - $2.99 </Text>
+                </div>
+            </div>
+            
+        </div>
+    
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var image1 = document.getElementById("main_food_image1");
+        
+                window.addEventListener("scroll", function () {
+                    // Adjust the multiplier to control the speed of the movement
+                    var scrollPosition = window.scrollY;
+                    var translateY = scrollPosition * -0.025; // Adjust the multiplier as needed
+        
+                    image1.style.transform = "translate(-50%, calc(-50% + " + translateY + "vh))";
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+            var image = document.getElementById("dessert_food_image1");
+
+                window.addEventListener("scroll", function () {
+                    var scrollPosition = window.scrollY;
+                    var thresholdPercentage = 220; 
+
+                
+                    var threshold = (thresholdPercentage / 100) * window.innerHeight;
+
+                    if (scrollPosition > threshold) {
+                        var translateY = (scrollPosition - threshold) * -0.025;
+                        image.style.transform = "translate(-50%, calc(-50% + " + translateY + "vh))";
+                    }
+                });
+            });
+        </script>
+
+    </body>
+
+
+    <footer class = "footer">
+        <a href = index.html>
+            Game Day Grill
+        </a>
+
+        <div>
+            <text>
+                123.456.7890
+            </text>
+
+            <text>
+                GameDayGrill@gmail.com
+            </text>
+
+            <text>
+                Follow Our Instagram: @GDG
+            </text>
+
+            <text>
+                123 Eat St. Mckinney, Tx 75070
+            </text>
+
+            <img src = "BPALogo.png"/>
+        </div>
+    </footer>
+</html>
+
+

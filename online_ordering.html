@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            BPA website creation
+        </title>    
+
+        <link rel = "stylesheet"
+        type = "text/css"
+        href = "style.css"/> 
+    </head>
+    
+
+    <body class = "body">
+        <div class = "main">      
+            <img src = "logo.png" style = "width: 4vw; margin-left: 5vw; margin-right: -3vw;">  
+            <a href = index.html>
+                Game Day Grill
+            </a>
+        </div>
+
+        <nav class = "link">
+            <a href = "index.html" >
+                Home
+            </a>
+
+            <a href = "menu.html">
+                Menu
+            </a>
+
+            <a href = "online_ordering.html" Style = "color: #FFF200">
+                Order Online
+            </a>
+
+            <a href = "aboutUs.html">
+                About Us
+            </a>
+        </nav>
+
+        <div class = "online_menu_selector">
+            
+
+            <div class="online_food_options">
+                <button1 onclick="openNav()"> Cart </button1>
+
+                <button onclick="showFoodItems('appetizers')">Appetizers</button>
+                <button onclick="showFoodItems('mainCourse')">Main  Course</button>
+                <button onclick="showFoodItems('desserts')">Desserts</button>
+                <button onclick="showFoodItems('drinks')">Drinks</button>
+            </div>
+            
+            <!-- Container to display food items based on selection -->
+            <div id="foodItemsContainer" class = "foodItemsContainer">
+                <!-- Food items will be displayed here -->
+            </div>
+        </div> 
+        
+
+
+        
+
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <h2>Cart</h2>
+            <ul id="cartItems"></ul>
+
+            <button class = "paymentButton" onClick = "startMiniGame()">
+                Check Out
+            </button>
+        </div>
+
+
+
+        <div id="miniGame" class = "paymentPage">
+            <div id="field">
+              <div id="goalposts"></div>
+              <div id="goalpostsReal"></div>
+              
+            </div>
+            <div id="arrowContainer">
+              <div id="arrow"></div>
+              <div id="largerArrow"></div>
+              <div id="football"></div>
+
+              <button onclick="kickFootball()" class = "kickButton">Kick</button>
+              <div id="scoreMessage" style = "color: #FFF5EE; font-family: 'Gill Sans', sans-serif; font-size: 1em"></div>
+            </div>
+        </div>
+
+
+        <div id = "paymentPage" class = "paymentPage">
+            <a href="javascript:void(0)" class="closePayButton" onclick="closeEvent()">×</a>
+            <h1 id = "payTitle"> Enter Payment Info </h1>
+            
+            <form id = "paymentForm">
+                <input name = "CardNumber" placeholder = "Card Number" class = "payIn" type = "text">
+
+                <input name = "CardName" placeholder = "Name on Card" class = "payIn" type = "text">
+
+                <input name = "ExpirationDate" placeholder = "Expiration Date (MM / YY)" class = "payIn" type = "text">
+
+                <input name = "Security" placeholder = "Security Code" class = "payIn" type = "integer">
+
+                <input name = "Address" placeholder = "Billing Address" class = "payIn" type = "text">
+
+                <input name = "number" placeholder = "Phone Number" class = "payIn" type = "phone number">
+            </form>
+
+            <button id = "payButon" onClick = "closeEvent()"> Pay Now! </button>
+        </div>
+
+        <audio id="audioPlayer">
+            <source src="whistle.mp3" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+        
+
+
+        <script>
+            // showing all the food options
+            var discount = false;
+            var foodData = {
+                    appetizers: [
+                        { name: "Fried Mozzarella Slices x 5", image: "menu_images/Fried Mozzarella Slices.png", price: "$13.50" },
+                        { name: "Hot Buffalo Wings x 6", image: "menu_images/wings.jpg", price: "$8.99" },
+                        { name: "Chili Nacho Fries", image: "menu_images/loadedFries.jpg", price: "$9.99"},
+                        { name: "Onion Rings", image: "menu_images/onionRings.jpg", price: "$6.50"},
+                    ],
+                    mainCourse: [
+                        { name: "Classic Burger", image: "menu_images/burgerMenu.jpeg", price: "$9.50" },
+                        { name: "Chicken Fajitas", image: "menu_images/chickenFajitas.jpg", price: "$14.99" },
+                        { name: "Mushroom Pizza", image: "menu_images/pizzamush.webp", price: "$18.50"},
+                        { name: "Steak", image: "menu_images/steak.jpeg", price: "$29.99"},
+                    ],
+                    desserts: [
+                        { name: "Lava Cake", image: "menu_images/lavaCake.jpeg", price: "$7.50" },
+                        { name: "Banana Crepes", image: "menu_images/bananaCrepes.jpg", price: "$3.99" },
+                        { name: "Cheesecake", image: "menu_images/cheesecake.jpg", price: "$2.99 per slice"},
+                        { name: "Root Bear Float", image: "menu_images/rootBeerFloat.jpg", price: "$4.99"},
+                    ],
+                    drinks: [
+                        { name: "Lemonade", image: "menu_images/lemonade.jpg", price: "$4.99" },
+                        { name: "Fountain Soda (All Options)", image: "menu_images/soda.jpeg", price: "$3.99" },
+                        { name: "Beer (All Options", image: "menu_images/beer.jpeg", price: "$5.99"},
+                        { name: "Apple/Orange Juice", image: "menu_images/appleJuice.jpeg", price: "$2.99"},
+                    ]
+                };
+
+            function showFoodItems(foodType) {
+                var foodItemsContainer = document.getElementById("foodItemsContainer");
+
+                // Clear previous content
+                foodItemsContainer.innerHTML = "";
+
+                if (foodData[foodType]) {
+                    foodItemsContainer.innerHTML = `<div class = "online_menu_type"> <h2">${capitalizeFirstLetter(foodType)}</h2> </div>${generateItemsWithImages(foodData[foodType])} `;
+                }
+            }
+
+
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            function generateItemsWithImages(items) {
+                return items.map(item => `
+                    <div class="food-item">
+                        <button class="online_food_button" style="background-image: url('${item.image}')" onclick="addToCart('${item.name} - ${item.price}')"></button>
+                        <p class = "online_food_text">${item.name} - ${item.price}</p>
+                    </div>
+                `).join("");
+            }
+            
+
+            //cart
+            var cartItems = [];
+
+            function addToCart(itemName, price) {
+                // Add the selected item to the cart
+                cartItems.push({name: itemName, price: price});
+
+                // Update the cart display
+                updateCartDisplay();
+            }
+
+            function updateCartDisplay() {
+                var cartItemsElement = document.getElementById("cartItems");
+
+                // Clear previous content
+                cartItemsElement.innerHTML = "";
+
+                // Display each item in the cart with a remove button
+                cartItems.forEach(function(item) {
+                    var listItem = document.createElement("li");
+
+                    // Item text
+                    listItem.textContent = `${item.name} - ${item.price || ''}`;
+
+                    // Remove button
+                    var removeButton = document.createElement("span");
+                    removeButton.className = "removeButton";
+                    removeButton.textContent = "X";
+                    removeButton.onclick = function() {
+                        removeFromCart(item);
+                    };
+
+
+                    listItem.appendChild(removeButton);
+
+                    cartItemsElement.appendChild(listItem);
+                });
+            }
+
+            function calculatePrice() {
+                var totalPrice = 0;
+
+                items.forEach(item => {
+                    const price = parseFloat(item.dataset.price);
+                    const subtotal = price;
+                    totalPrice += subtotal;
+                });
+
+                // Update the total price in the HTML
+                document.getElementById('totalPrice').textContent = totalPrice;
+            }
+
+
+            // sidebar
+            function openNav() {
+                document.getElementById("mySidebar").style.width = "25vw";
+                document.getElementById("main").style.marginLeft = "25vw";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+            }
+
+
+            function removeFromCart(item) {
+                // Remove the item from the cartItems array
+                var index = cartItems.indexOf(item);
+                if (index !== -1) {
+                    cartItems.splice(index, 1);
+                }
+
+                // Update the cart display
+                updateCartDisplay();
+            }
+
+
+            function payment(){
+                document.getElementById("paymentPage").style.width = "45vw";
+                document.getElementById("paymentForm").style.display = "grid";
+                document.getElementById("payTitle").style.display = "inline";
+                calculatePrice();
+            }
+
+
+            function closeEvent(){
+                document.getElementById("paymentPage").style.width = "0vw";
+                document.getElementById("miniGame").style.width = "0vw";
+            }
+
+            
+            // audio
+            var audio = document.getElementById("audioPlayer");
+
+            function playAudio() {
+                audio.play();
+            }
+
+
+            //mini-game
+            let isKicked = false;
+            var arrowDeg = null;
+        
+            function startMiniGame() {
+            // Show the mini-game interface
+            document.getElementById("miniGame").style.display = "flex";
+            document.getElementById("miniGame").style.width = "45vw";
+
+            resetMiniGame();
+            }
+
+            
+        
+            function resetMiniGame() {
+                // Reset the score message
+                document.getElementById("scoreMessage").innerText = "";
+                arrowDeg = 0;
+                isKicked = false;
+            
+                // Reset football position
+                document.getElementById("football").style.bottom = "0";
+                }
+            
+                function kickFootball() {
+                if (isKicked) return;
+
+                const arrowPosition = document.getElementById("largerArrow");
+                const goalPosition = document.getElementById("goalposts");
+
+                const arrowRect = arrowPosition.getBoundingClientRect();
+                const goalRect = goalPosition.getBoundingClientRect();
+
+                console.log(arrowRect);
+                console.log(goalRect);
+
+                if (
+                    arrowRect.right < goalRect.right  &&
+                    arrowRect.left > goalRect.left &&
+                    arrowRect.bottom > goalRect.top &&
+                    arrowRect.top < goalRect.bottom
+                ) {
+                    document.getElementById("scoreMessage").innerText = "It's good! You get 5% off!";
+                    moveFootball(1);
+                    discount = true;
+                } else {
+                    document.getElementById("scoreMessage").innerText = "Oops! You missed. No Offer For You!";
+                    moveFootball(0);
+                    discount = false;
+                }
+
+                const currentRotation = parseFloat(
+                    arrowPosition.style.transform.replace(/[^0-9\-.,]/g, "") || 0
+                );
+                
+
+                arrowPosition.style.animationPlayState = "paused";
+                arrowPosition.style.transform = `rotate(${currentRotation}deg)`;
+
+                const lilArrow = document.getElementById("arrow");
+                lilArrow.style.animationPlayState = "paused";
+                lilArrow.style.transform = `rotate(${currentRotation}deg)`;
+            
+                
+                isKicked = true;
+
+
+                setTimeout(function() {
+                    payment();
+                }, 5000)
+            }
+
+            
+
+        
+            function moveFootball(win){
+            if (win == 1){
+                const football = document.getElementById("football");
+                football.style.bottom =  "2000%";
+                football.style.scale = "85%";
+                
+
+                setTimeout(function() {
+                    football.style.bottom = "1500%";
+                    football.style.scale = "60%";
+                    football.style.zIndex = "0";
+                    playAudio();
+                }, 2000);
+            } else {
+                arrow = document.getElementById("largerArrow").getBoundingClientRect();
+
+                if(arrow.left > window.innerWidth/2){
+                    football.style.bottom = "2000%";
+                    football.style.left = "80%";
+                    football.style.scale = "85%";
+
+                    setTimeout(function() {
+                        football.style.bottom = "1500%";
+                        football.style.scale = "60%";
+                        football.style.zIndex = "0";
+                        playAudio();
+                    }, 2000);
+                } else {
+                    football.style.bottom = "2000%";
+                    football.style.left = "20%";
+
+                    setTimeout(function() {
+                        football.style.bottom = "1500%";
+                        football.style.scale = "60%";
+                        football.style.zIndex = "0";
+                        playAudio();
+                    }, 2000);
+                }
+            }
+            }
+        </script>
+    </body>
+
+
+    <footer class = "footerOO">
+        <a href = index.html>
+            Game Day Grill
+        </a>
+
+        <div>
+            <text>
+                123.456.7890
+            </text>
+
+            <text>
+                GameDayGrill@gmail.com
+            </text>
+
+            <text>
+                Follow Our Instagram: @GDG
+            </text>
+
+            <text>
+                123 Eat St. Mckinney, Tx 75070
+            </text>
+
+            <img src = "BPALogo.png"/>
+        </div>
+    </footer>
+</html>
